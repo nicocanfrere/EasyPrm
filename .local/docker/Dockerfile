@@ -51,5 +51,8 @@ RUN sed -i 's|;sendmail_path =|sendmail_path = /usr/bin/mhsendmail --smtp-addr m
 
 COPY configs/xxxx-custom.ini $PHP_INI_DIR/conf.d/
 
+RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" > /etc/timezone
+RUN sed -i -e "s/<policy domain=\"coder\" rights=\"none\" pattern=\"PDF\" \/>/<policy domain=\"coder\" rights=\"read|write\" pattern=\"PDF\" \/>/g" /etc/ImageMagick-6/policy.xml
+
 RUN apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
