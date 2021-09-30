@@ -1,4 +1,9 @@
-.idea
+/.idea
+/.local/volumes/databases/easy_prm/*
+!/.local/volumes/databases/easy_prm/.gitkeep
+/.local/volumes/databases/redis/*
+!/.local/volumes/databases/redis/.gitkeep
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -18,3 +23,8 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###

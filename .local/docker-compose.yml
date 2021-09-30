@@ -1,0 +1,110 @@
+version: '3.7'
+
+networks:
+  easy_prm_network:
+    driver: bridge
+
+services:
+
+  easy_prm_proxy_traefik:
+    command:
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --api.debug=true
+      - --log.level=DEBUG
+      - --log.format=common
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=easy_prm_network
+      - --entrypoints.http.address=:80
+      - --accesslog=true
+    container_name: easy_prm_proxy_traefik
+    image: traefik:2.3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`easy_prm_monitor.local`)"
+      - "traefik.http.routers.api.service=api@internal"
+    networks:
+      - easy_prm_network
+    ports:
+      - "80:80"
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  easy_prm_mailhog:
+    container_name: easy_prm_mailhog
+    image: mailhog/mailhog:v1.0.0
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - easy_prm_network
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  easy_prm_database:
+    container_name: easy_prm_database
+    image: postgres:13.4
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: easy_prm
+    networks:
+      - easy_prm_network
+    labels:
+      - "traefik.enable=false"
+    volumes:
+      - type: bind
+        source: ./volumes/databases/easy_prm
+        target: /data/postgres
+    ports:
+      - "5440:5432"
+
+  easy_prm_redis:
+    container_name: easy_prm_redis
+    image: redis:6.2.5
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - easy_prm_network
+    volumes:
+      - type: bind
+        source: ./volumes/databases/redis
+        target: /data
+    ports:
+      - "6379:6379"
+
+  easy_prm_php:
+    image: nico.php-fpm:8.0.10
+    container_name: easy_prm_php
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - easy_prm_network
+    volumes:
+      - ./../../EasyPrm:/EasyPrm
+    working_dir: /EasyPrm
+    depends_on:
+      - easy_prm_database
+
+  easy_prm_nginx:
+    container_name: easy_prm_nginx
+    image: nginx:1.19
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.easy_prm_nginx.rule=Host(`easy-prm.local`)"
+      - "traefik.http.routers.easy_prm_nginx.entryPoints=http"
+      - "traefik.http.middlewares.easy_prm_nginx.headers.accessControlAllowMethods=*"
+      - "traefik.http.middlewares.easy_prm_nginx.headers.accessControlAllowOriginList=*"
+      - "traefik.http.middlewares.easy_prm_nginx.headers.accessControlAllowHeaders=*"
+    networks:
+      easy_prm_network:
+        aliases:
+          - "easy-prm.local"
+    volumes:
+      - ./../../EasyPrm:/EasyPrm
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+    working_dir: /EasyPrm
+    depends_on:
+      - easy_prm_php
