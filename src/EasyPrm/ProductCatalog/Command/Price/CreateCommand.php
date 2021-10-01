@@ -4,6 +4,7 @@ namespace EasyPrm\ProductCatalog\Command\Price;
 
 use EasyPrm\ProductCatalog\Contract\PriceFactoryInterface;
 use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
+use EasyPrm\ProductCatalog\Dto\PriceDto;
 use EasyPrm\ProductCatalog\Event\PriceCreatedEvent;
 use EasyPrm\ProductCatalog\Exception\PriceAlreadyExistsException;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -37,18 +38,17 @@ class CreateCommand
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function handle(array $data)
+    public function handle(PriceDto $dto)
     {
         //TODO data validation
-        //TODO change data to dto
-        $exists = $this->priceRepository->oneByLabel($data['label']);
+        $exists = $this->priceRepository->oneByLabel($dto->label);
         if ($exists) {
             throw new PriceAlreadyExistsException();
         }
         $price = $this->priceFactory->create(
-            $data['label'],
-            $data['amount'],
-            $data['currency']
+            $dto->label,
+            $dto->amount,
+            $dto->currency
         );
         $this->priceRepository->save($price);
         $this->eventDispatcher->dispatch(
