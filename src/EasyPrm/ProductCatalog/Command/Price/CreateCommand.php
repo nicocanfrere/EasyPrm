@@ -5,7 +5,7 @@ namespace EasyPrm\ProductCatalog\Command\Price;
 use EasyPrm\ProductCatalog\Contract\PriceFactoryInterface;
 use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
 use EasyPrm\ProductCatalog\Event\PriceCreatedEvent;
-use EasyPrm\ProductCatalog\Exception\ProductAlreadyExistsException;
+use EasyPrm\ProductCatalog\Exception\PriceAlreadyExistsException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -42,7 +42,7 @@ class CreateCommand
         //TODO data validation
         $exists = $this->priceRepository->oneByLabel($data['label']);
         if ($exists) {
-            throw new ProductAlreadyExistsException();
+            throw new PriceAlreadyExistsException();
         }
         $price = $this->priceFactory->create(
             $data['label'],
