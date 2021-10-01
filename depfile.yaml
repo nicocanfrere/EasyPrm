@@ -4,6 +4,12 @@ exclude_files:
     - '#.*test.*#'
 layers:
     -
+        name: Psr
+        collectors:
+            -
+                type: className
+                regex: Psr\\.*
+    -
         name: EasyPrmCore
         collectors:
             -
@@ -18,4 +24,6 @@ layers:
 ruleset:
     EasyPrmProductCatalog:
         - EasyPrmCore
+        - Psr
     EasyPrmCore:
+        - Psr
