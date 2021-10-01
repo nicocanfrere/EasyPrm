@@ -1,12 +1,13 @@
 <?php
 
-namespace EasyPrm\Tests\ProductCatalog\Command;
+namespace EasyPrm\Tests\ProductCatalog\Command\Price;
 
 use EasyPrm\Core\Contract\IdentifierFactoryInterface;
 use EasyPrm\Core\Factory\IdentifierFactory;
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Command\Price\CreateCommand;
 use EasyPrm\ProductCatalog\Contract\PriceInterface;
+use EasyPrm\ProductCatalog\Dto\PriceDto;
 use EasyPrm\ProductCatalog\Exception\PriceAlreadyExistsException;
 use EasyPrm\ProductCatalog\Factory\PriceFactory;
 use EasyPrm\ProductCatalog\Price;
@@ -42,14 +43,18 @@ class CreateCommandTest extends TestCase
             $repository,
             $eventDispatcher
         );
-        $command->handle(['label' => 'label', 'amount' => 100, 'currency' => 'EUR']);
-        $this->assertInstanceOf(PriceInterface::class, $repository->oneByLabel('label'));
+        $dto = new PriceDto();
+        $dto->label = 'label';
+        $dto->amount = 100;
+        $dto->currency = 'EUR';
+        $command->handle($dto);
+        $this->assertInstanceOf(PriceInterface::class, $repository->oneByLabel($dto->label));
     }
 
     /**
      * @test
      */
-    public function throwProductAlreadyExistsException()
+    public function throwPriceAlreadyExistsException()
     {
         $sameLabel = 'label';
         $transliterator = new Transliterator();
@@ -74,7 +79,11 @@ class CreateCommandTest extends TestCase
             $repository,
             $eventDispatcher
         );
+        $dto = new PriceDto();
+        $dto->label = $sameLabel;
+        $dto->amount = 100;
+        $dto->currency = 'EUR';
         $this->expectException(PriceAlreadyExistsException::class);
-        $command->handle(['label' => 'label', 'amount' => 100, 'currency' => 'EUR']);
+        $command->handle($dto);
     }
 }
