@@ -9,6 +9,7 @@ services:
     resource: '../../src/EasyPrm/Core/'
     exclude:
       - '../../src/EasyPrm/Core/Contract/'
+      - '../../src/EasyPrm/Core/Event/'
       - '../../src/EasyPrm/Core/Exception/'
       - '../../src/EasyPrm/Core/ValueObject/'
 
