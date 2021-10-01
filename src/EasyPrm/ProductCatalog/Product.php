@@ -54,4 +54,18 @@ class Product implements ProductInterface
     {
         return $this->alias;
     }
+
+    public function setLabel(?string $label): ProductInterface
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function setAlias(?string $alias): ProductInterface
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
 }

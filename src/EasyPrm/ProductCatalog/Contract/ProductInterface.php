@@ -18,4 +18,8 @@ interface ProductInterface
     public function getPrices(): ?array;
 
     public function getIdentifier(): ?Identifier;
+
+    public function setLabel(?string $label): ProductInterface;
+
+    public function setAlias(?string $alias): ProductInterface;
 }
