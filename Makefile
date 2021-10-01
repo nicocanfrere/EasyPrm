@@ -1,4 +1,4 @@
-.PHONY: up down cs csf punit
+.PHONY: up down cs csf punit deptrac
 
 up:
 	docker-compose -f .local/docker-compose.yml up --remove-orphans
@@ -10,3 +10,5 @@ csf:
 	./vendor/bin/phpcbf
 punit:
 	php ./bin/phpunit
+deptrac:
+	./vendor/bin/deptrac

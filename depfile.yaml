@@ -1,0 +1,21 @@
+paths:
+    - ./src/EasyPrm
+exclude_files:
+    - '#.*test.*#'
+layers:
+    -
+        name: EasyPrmCore
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\Core\\.*
+    -
+        name: EasyPrmProductCatalog
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\ProductCatalog\\.*
+ruleset:
+    EasyPrmProductCatalog:
+        - EasyPrmCore
+    EasyPrmCore:

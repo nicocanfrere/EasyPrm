@@ -44,3 +44,10 @@ Run your tests locally with *(see Makefile for real command)*:
 ```bash
 make punit
 ```
+
+### Deptrac [doc](https://github.com/qossmic/deptrac)
+
+show report *(see Makefile for real command)*:
+```bash
+make deptrac
+```
