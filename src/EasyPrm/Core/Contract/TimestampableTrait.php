@@ -2,9 +2,6 @@
 
 namespace EasyPrm\Core\Contract;
 
-use EasyPrm\ProductCatalog\Contract\ProductInterface;
-use EasyPrm\ProductCatalog\Product;
-
 /**
  * Trait TimestampableTrait
  */
