@@ -19,6 +19,8 @@ class Price implements PriceInterface
     private $identifier;
     /** @var string|null */
     private $label;
+    /** @var string|null */
+    private $alias;
     /** @var Amount|null */
     private $amount;
     /** @var Currency|null */
@@ -29,17 +31,24 @@ class Price implements PriceInterface
      *
      * @param Identifier $identifier
      * @param string $label
+     * @param string $alias
      * @param Amount $amount
      * @param Currency $currency
      */
-    public function __construct(Identifier $identifier, string $label, Amount $amount, Currency $currency)
-    {
+    public function __construct(
+        Identifier $identifier,
+        string $label,
+        string $alias,
+        Amount $amount,
+        Currency $currency
+    ) {
         $this->identifier = $identifier;
         $this->label      = $label;
+        $this->alias      = $alias;
         $this->amount     = $amount;
         $this->currency   = $currency;
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTime();
+        $this->createdAt  = new \DateTimeImmutable();
+        $this->updatedAt  = new \DateTime();
     }
 
 
@@ -61,5 +70,10 @@ class Price implements PriceInterface
     public function getCurrency(): ?Currency
     {
         return $this->currency;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
     }
 }

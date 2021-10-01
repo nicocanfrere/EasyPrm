@@ -20,4 +20,6 @@ interface PriceInterface
     public function getAmount(): ?Amount;
 
     public function getIdentifier(): ?Identifier;
+
+    public function getAlias(): ?string;
 }
