@@ -40,6 +40,7 @@ class CreateCommand
     public function handle(array $data)
     {
         //TODO data validation
+        //TODO change data to dto
         $exists = $this->priceRepository->oneByLabel($data['label']);
         if ($exists) {
             throw new PriceAlreadyExistsException();
