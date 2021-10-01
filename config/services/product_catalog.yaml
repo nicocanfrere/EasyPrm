@@ -14,3 +14,5 @@ services:
 
   EasyPrm\ProductCatalog\Contract\PriceFactoryInterface:
     class: EasyPrm\ProductCatalog\Factory\PriceFactory
+  EasyPrm\ProductCatalog\Contract\ProductFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\ProductFactory
