@@ -18,15 +18,19 @@ class Product implements ProductInterface
     private $identifier;
     /** @var string|null */
     private $label;
+    /** @var string|null */
+    private $alias;
     /** @var PriceInterface[]|null */
     private $prices;
 
     public function __construct(
         Identifier $identifier,
-        string $label
+        string $label,
+        string $alias
     ) {
         $this->identifier = $identifier;
         $this->label = $label;
+        $this->alias = $alias;
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTime();
     }
@@ -44,5 +48,10 @@ class Product implements ProductInterface
     public function getPrices(): ?array
     {
         return $this->prices;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
     }
 }
