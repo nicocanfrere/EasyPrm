@@ -1,6 +1,6 @@
 <?php
 
-namespace EasyPrm\ProductCatalog\Repository;
+namespace EasyPrm\Tests\ProductCatalog\Repository;
 
 use EasyPrm\Core\Contract\TransliteratorInterface;
 use EasyPrm\Core\ValueObject\Identifier;
