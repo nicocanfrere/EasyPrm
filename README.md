@@ -1,5 +1,7 @@
 # EasyPrm
 
+[DDD](https://en.wikipedia.org/wiki/Domain-driven_design) practice and exercise project based on the development of a [PRM](https://en.wikipedia.org/wiki/Partner_relationship_management) with [Symfony](https://symfony.com/)
+
 ## Local development environment - .local directory
 
 ### Php image
