@@ -12,6 +12,10 @@ services:
       - '../../src/EasyPrm/ProductCatalog/Exception/'
       - '../../src/EasyPrm/ProductCatalog/ValueObject/'
 
+  EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog\ProductRepository
+  EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog\PriceRepository
   EasyPrm\ProductCatalog\Contract\PriceFactoryInterface:
     class: EasyPrm\ProductCatalog\Factory\PriceFactory
   EasyPrm\ProductCatalog\Contract\ProductFactoryInterface:
