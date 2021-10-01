@@ -1,0 +1,16 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\ProductCatalog\:
+    resource: '../../src/EasyPrm/ProductCatalog/'
+    exclude:
+      - '../../src/EasyPrm/ProductCatalog/Contract/'
+      - '../../src/EasyPrm/ProductCatalog/Exception/'
+      - '../../src/EasyPrm/ProductCatalog/ValueObject/'
+
+  EasyPrm\ProductCatalog\Contract\PriceFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\PriceFactory
