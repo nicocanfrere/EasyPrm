@@ -76,4 +76,32 @@ class Price implements PriceInterface
     {
         return $this->alias;
     }
+
+    public function setLabel(?string $label): PriceInterface
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function setAlias(?string $alias): PriceInterface
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    public function setAmount(?Amount $amount): PriceInterface
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function setCurrency(?Currency $currency): PriceInterface
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
 }

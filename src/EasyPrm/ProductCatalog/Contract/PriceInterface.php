@@ -22,4 +22,12 @@ interface PriceInterface
     public function getIdentifier(): ?Identifier;
 
     public function getAlias(): ?string;
+
+    public function setAmount(?Amount $amount): PriceInterface;
+
+    public function setLabel(?string $label): PriceInterface;
+
+    public function setCurrency(?Currency $currency): PriceInterface;
+
+    public function setAlias(?string $alias): PriceInterface;
 }
