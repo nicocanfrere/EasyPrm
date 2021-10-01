@@ -40,7 +40,7 @@ class InMemoryProductRepository implements \EasyPrm\ProductCatalog\Contract\Prod
 
     public function oneByIdentifier($identifier): ?ProductInterface
     {
-        if ($identifier instanceof Identifier ) {
+        if ($identifier instanceof Identifier) {
             $identifier = (string)$identifier;
         }
         if (!is_string($identifier)) {
