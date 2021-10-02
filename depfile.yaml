@@ -4,6 +4,12 @@ exclude_files:
     - '#.*test.*#'
 layers:
     -
+        name: DoctrineCollection
+        collectors:
+            -
+                type: className
+                regex: Doctrine\\Common\\Collections\\.*
+    -
         name: Psr
         collectors:
             -
@@ -25,5 +31,6 @@ ruleset:
     EasyPrmProductCatalog:
         - EasyPrmCore
         - Psr
+        - DoctrineCollection
     EasyPrmCore:
         - Psr

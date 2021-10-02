@@ -2,6 +2,8 @@
 
 namespace EasyPrm\ProductCatalog;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use EasyPrm\Core\Contract\TimestampableTrait;
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Contract\PriceInterface;
@@ -20,7 +22,7 @@ class Product implements ProductInterface
     private $label;
     /** @var string|null */
     private $alias;
-    /** @var PriceInterface[]|null */
+    /** @var PriceInterface[]|Collection|null */
     private $prices;
 
     public function __construct(
@@ -33,6 +35,7 @@ class Product implements ProductInterface
         $this->alias = $alias;
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTime();
+        $this->prices = new ArrayCollection();
     }
 
     public function getIdentifier(): ?Identifier
@@ -45,7 +48,7 @@ class Product implements ProductInterface
         return $this->label;
     }
 
-    public function getPrices(): ?array
+    public function getPrices(): ?Collection
     {
         return $this->prices;
     }
@@ -65,6 +68,24 @@ class Product implements ProductInterface
     public function setAlias(?string $alias): ProductInterface
     {
         $this->alias = $alias;
+
+        return $this;
+    }
+
+    public function addPrice(PriceInterface $price): ProductInterface
+    {
+        if (!$this->prices->contains($price)) {
+            $this->prices->add($price);
+        }
+
+        return $this;
+    }
+
+    public function removePrice(PriceInterface $price): ProductInterface
+    {
+        if ($this->prices->contains($price)) {
+            $this->prices->removeElement($price);
+        }
 
         return $this;
     }

@@ -10,6 +10,15 @@
         <field name="alias" type="string" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
-
+        <many-to-many field="prices" target-entity="EasyPrm\ProductCatalog\Price">
+            <join-table name="product_catalog_products_to_prices">
+                <join-columns>
+                    <join-column name="product_identifier" referenced-column-name="identifier"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="price_identifier" referenced-column-name="identifier"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>
