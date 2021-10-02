@@ -41,8 +41,11 @@ class UpdateCommand
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function handle(PriceDto $dto)
+    public function handle(PriceDto $dto): void
     {
+        if (!$dto->identifier) {
+            throw new \InvalidArgumentException();
+        }
         $original = $this->priceRepository->oneByIdentifier($dto->identifier);
         if (!$original) {
             throw new PriceNotFoundException();

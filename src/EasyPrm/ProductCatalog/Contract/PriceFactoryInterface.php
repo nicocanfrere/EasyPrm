@@ -12,6 +12,12 @@ use EasyPrm\ProductCatalog\ValueObject\Currency;
  */
 interface PriceFactoryInterface
 {
-
+    /**
+     * @param string $label
+     * @param int|float $amount
+     * @param string $currency
+     *
+     * @return PriceInterface
+     */
     public function create(string $label, $amount, string $currency): PriceInterface;
 }

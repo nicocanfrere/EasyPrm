@@ -5,6 +5,7 @@ namespace Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use EasyPrm\Core\Contract\TransliteratorInterface;
+use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Contract\PriceInterface;
 use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
 use EasyPrm\ProductCatalog\Price;
@@ -38,7 +39,7 @@ class PriceRepository extends ServiceEntityRepository implements
         $this->_em->flush();
     }
 
-    public function oneByIdentifier($identifier): ?PriceInterface
+    public function oneByIdentifier(Identifier $identifier): ?PriceInterface
     {
         $qb = $this->createQueryBuilder('price');
         $qb->andWhere('price.identifier = :identifier')->setParameter('identifier', $identifier);

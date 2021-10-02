@@ -38,7 +38,7 @@ class CreateCommand
         $this->eventDispatcher   = $eventDispatcher;
     }
 
-    public function handle(ProductDto $dto)
+    public function handle(ProductDto $dto): void
     {
         //TODO data validation
         $exists = $this->productRepository->oneByLabel($dto->label);

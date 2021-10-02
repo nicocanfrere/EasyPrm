@@ -32,8 +32,11 @@ class RemoveCommand
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function handle(PriceDto $dto)
+    public function handle(PriceDto $dto): void
     {
+        if (!$dto->identifier) {
+            throw new \InvalidArgumentException();
+        }
         $price = $this->priceRepository->oneByIdentifier($dto->identifier);
         if (!$price) {
             throw new PriceNotFoundException();

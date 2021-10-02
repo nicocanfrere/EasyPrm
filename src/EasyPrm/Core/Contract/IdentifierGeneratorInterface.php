@@ -7,5 +7,5 @@ namespace EasyPrm\Core\Contract;
  */
 interface IdentifierGeneratorInterface
 {
-    public function generate();
+    public function generate(): string;
 }

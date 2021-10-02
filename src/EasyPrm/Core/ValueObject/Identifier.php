@@ -5,12 +5,12 @@ namespace EasyPrm\Core\ValueObject;
 /**
  * Class Identifier
  */
-class Identifier
+final class Identifier
 {
     /** @var string */
     private $value;
 
-    private function __construct($value)
+    private function __construct(string $value)
     {
         $this->value = $value;
     }

@@ -46,6 +46,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.12.99",
         "phpunit/phpunit": "^9.5",
         "qossmic/deptrac-shim": "^0.15.2",
         "squizlabs/php_codesniffer": "*",

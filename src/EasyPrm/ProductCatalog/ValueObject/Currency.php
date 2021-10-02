@@ -7,7 +7,7 @@ use EasyPrm\ProductCatalog\Exception\InvalidCurrencyException;
 /**
  * Class Currency
  */
-class Currency
+final class Currency
 {
     /** @var string */
     private $value;

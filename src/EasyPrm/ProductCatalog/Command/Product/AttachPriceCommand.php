@@ -39,7 +39,7 @@ class AttachPriceCommand
         $this->eventDispatcher   = $eventDispatcher;
     }
 
-    public function handle(PriceAttachmentDto $priceAttachmentDto)
+    public function handle(PriceAttachmentDto $priceAttachmentDto): void
     {
         if (!$priceAttachmentDto->productIdentifier || !$priceAttachmentDto->priceIdentifier) {
             return;

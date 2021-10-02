@@ -36,6 +36,9 @@ class PriceFactory implements PriceFactoryInterface
         $this->transliterator = $transliterator;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function create(string $label, $amount, string $currency): PriceInterface
     {
         return new Price(

@@ -5,6 +5,7 @@ namespace Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use EasyPrm\Core\Contract\TransliteratorInterface;
+use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Contract\ProductInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
 use EasyPrm\ProductCatalog\Product;
@@ -38,7 +39,7 @@ class ProductRepository extends ServiceEntityRepository implements
         $this->_em->flush();
     }
 
-    public function oneByIdentifier($identifier): ?ProductInterface
+    public function oneByIdentifier(Identifier $identifier): ?ProductInterface
     {
         $qb = $this->createQueryBuilder('product');
         $qb->andWhere('product.identifier = :identifier')->setParameter('identifier', $identifier);

@@ -22,7 +22,7 @@ class Product implements ProductInterface
     private $label;
     /** @var string|null */
     private $alias;
-    /** @var PriceInterface[]|Collection|null */
+    /** @var Collection<PriceInterface> */
     private $prices;
 
     public function __construct(

@@ -10,7 +10,7 @@ use EasyPrm\Core\Contract\TransliteratorInterface;
  */
 class Transliterator implements TransliteratorInterface
 {
-    public function transliterate(string $string, ?string $separator = '-'): string
+    public function transliterate(string $string, string $separator = '-'): string
     {
         return TransliteratorUtil::urlize(TransliteratorUtil::transliterate($string, $separator));
     }

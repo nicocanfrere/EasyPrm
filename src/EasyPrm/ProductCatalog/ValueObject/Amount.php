@@ -7,7 +7,7 @@ use EasyPrm\ProductCatalog\Exception\InvalidAmountException;
 /**
  * Class Amount
  */
-class Amount
+final class Amount
 {
     public const PRECISION = 1000000;
     /** @var int */
@@ -18,6 +18,12 @@ class Amount
         $this->value = $value;
     }
 
+    /**
+     * @param int|float $value
+     * @param bool $isRaw
+     *
+     * @return Amount
+     */
     public static function create($value, bool $isRaw = false): Amount
     {
         if (!self::isValid($value)) {
@@ -28,7 +34,7 @@ class Amount
         return new static($value);
     }
 
-    public static function fromRawValue($value): Amount
+    public static function fromRawValue(int $value): Amount
     {
         if (!is_int($value) || abs($value) >= PHP_INT_MAX) {
             throw new InvalidAmountException();
@@ -37,6 +43,11 @@ class Amount
         return self::create($value, true);
     }
 
+    /**
+     * @param int|float $value
+     *
+     * @return bool
+     */
     public static function isValid($value): bool
     {
         if (!is_numeric($value)) {
@@ -49,16 +60,29 @@ class Amount
         return true;
     }
 
+    /**
+     * @param int|float $value
+     *
+     * @return float|int
+     */
     public static function transform($value)
     {
         return $value * self::PRECISION;
     }
 
+    /**
+     * @param int $value
+     *
+     * @return float|int
+     */
     public static function reverseTransform(int $value)
     {
         return $value / self::PRECISION;
     }
 
+    /**
+     * @return float|int
+     */
     public function getValue()
     {
         return self::reverseTransform($this->value);

@@ -17,9 +17,9 @@ class AmountType extends Type
      * @param Amount $value
      * @param AbstractPlatform $platform
      *
-     * @return string|null
+     * @return int|null
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?int
     {
         return $value->getRawValue();
     }

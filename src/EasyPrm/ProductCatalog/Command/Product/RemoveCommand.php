@@ -32,8 +32,11 @@ class RemoveCommand
         $this->eventDispatcher   = $eventDispatcher;
     }
 
-    public function handle(ProductDto $dto)
+    public function handle(ProductDto $dto): void
     {
+        if (!$dto->identifier) {
+            throw new \InvalidArgumentException();
+        }
         $product = $this->productRepository->oneByIdentifier($dto->identifier);
         if (!$product) {
             throw new ProductNotFoundException();

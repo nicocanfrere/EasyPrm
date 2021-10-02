@@ -7,5 +7,5 @@ namespace EasyPrm\Core\Contract;
  */
 interface TransliteratorInterface
 {
-    public function transliterate(string $string, ?string $separator = '-'): string;
+    public function transliterate(string $string, string $separator = '-'): string;
 }
