@@ -2,60 +2,31 @@
 
 namespace EasyPrm\ProductCatalog\Command\Product;
 
-use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
-use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
-use EasyPrm\ProductCatalog\Dto\PriceAttachmentDto;
-use EasyPrm\ProductCatalog\Event\PriceAttachedToProduct;
-use EasyPrm\ProductCatalog\Exception\PriceNotFoundException;
-use EasyPrm\ProductCatalog\Exception\ProductNotFoundException;
-use Psr\EventDispatcher\EventDispatcherInterface;
+use EasyPrm\Core\ValueObject\Identifier;
 
 /**
  * Class AttachPriceCommand
  */
 class AttachPriceCommand
 {
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
-    /** @var PriceRepositoryInterface */
-    private $priceRepository;
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    /**
+     * @var Identifier|null
+     */
+    public $priceIdentifier;
+    /**
+     * @var Identifier|null
+     */
+    public $productIdentifier;
 
     /**
-     * AttachPriceCommand constructor.
+     * PriceAttachmentDto constructor.
      *
-     * @param ProductRepositoryInterface $productRepository
-     * @param PriceRepositoryInterface $priceRepository
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param string|null $productIdentifier
+     * @param string|null $priceIdentifier
      */
-    public function __construct(
-        ProductRepositoryInterface $productRepository,
-        PriceRepositoryInterface $priceRepository,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->productRepository = $productRepository;
-        $this->priceRepository   = $priceRepository;
-        $this->eventDispatcher   = $eventDispatcher;
-    }
-
-    public function handle(PriceAttachmentDto $priceAttachmentDto): void
+    public function __construct(?string $productIdentifier, ?string $priceIdentifier)
     {
-        if (!$priceAttachmentDto->productIdentifier || !$priceAttachmentDto->priceIdentifier) {
-            return;
-        }
-        $price = $this->priceRepository->oneByIdentifier($priceAttachmentDto->priceIdentifier);
-        if (!$price) {
-            throw new PriceNotFoundException();
-        }
-        $product = $this->productRepository->oneByIdentifier($priceAttachmentDto->productIdentifier);
-        if (!$product) {
-            throw new ProductNotFoundException();
-        }
-        $product->addPrice($price);
-        $this->productRepository->save($product);
-        $this->eventDispatcher->dispatch(
-            new PriceAttachedToProduct($product, $price)
-        );
+        $this->productIdentifier = $productIdentifier ? Identifier::create($productIdentifier) : null;
+        $this->priceIdentifier   = $priceIdentifier ? Identifier::create($priceIdentifier) : null;
     }
 }

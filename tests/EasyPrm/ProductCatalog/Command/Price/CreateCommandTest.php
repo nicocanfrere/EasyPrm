@@ -6,6 +6,7 @@ use EasyPrm\Core\Contract\IdentifierFactoryInterface;
 use EasyPrm\Core\Factory\IdentifierFactory;
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Command\Price\CreateCommand;
+use EasyPrm\ProductCatalog\Command\Price\CreateCommandHandler;
 use EasyPrm\ProductCatalog\Contract\PriceInterface;
 use EasyPrm\ProductCatalog\Dto\PriceDto;
 use EasyPrm\ProductCatalog\Exception\PriceAlreadyExistsException;
@@ -38,12 +39,12 @@ class CreateCommandTest extends TestCase
             $identifierFactory,
             $transliterator
         );
-        $command = new CreateCommand(
+        $command = new CreateCommandHandler(
             $factory,
             $repository,
             $eventDispatcher
         );
-        $dto = new PriceDto();
+        $dto = new CreateCommand();
         $dto->label = 'label';
         $dto->amount = 100;
         $dto->currency = 'EUR';
@@ -74,12 +75,12 @@ class CreateCommandTest extends TestCase
             $identifierFactory,
             $transliterator
         );
-        $command = new CreateCommand(
+        $command = new CreateCommandHandler(
             $factory,
             $repository,
             $eventDispatcher
         );
-        $dto = new PriceDto();
+        $dto = new CreateCommand();
         $dto->label = $sameLabel;
         $dto->amount = 100;
         $dto->currency = 'EUR';

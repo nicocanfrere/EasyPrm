@@ -4,7 +4,7 @@ namespace EasyPrm\Tests\ProductCatalog\Command\Product;
 
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Command\Product\AttachPriceCommand;
-use EasyPrm\ProductCatalog\Dto\PriceAttachmentDto;
+use EasyPrm\ProductCatalog\Command\Product\AttachPriceCommandHandler;
 use EasyPrm\ProductCatalog\Exception\PriceNotFoundException;
 use EasyPrm\ProductCatalog\Exception\ProductNotFoundException;
 use EasyPrm\ProductCatalog\Price;
@@ -29,8 +29,8 @@ class AttachPriceCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->transliterator  = new Transliterator();
-        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $this->transliterator    = new Transliterator();
+        $this->eventDispatcher   = $this->createMock(EventDispatcherInterface::class);
         $this->priceRepository   = new InMemoryPriceRepository($this->transliterator);
         $this->productRepository = new InMemoryProductRepository($this->transliterator);
     }
@@ -40,8 +40,8 @@ class AttachPriceCommandTest extends TestCase
      */
     public function throwProductNotFoundException()
     {
-        $priceId           = 'price';
-        $price             = new Price(
+        $priceId = 'price';
+        $price   = new Price(
             Identifier::create($priceId),
             'price',
             'price',
@@ -49,13 +49,13 @@ class AttachPriceCommandTest extends TestCase
             Currency::create('EUR')
         );
         $this->priceRepository->save($price);
-        $command = new AttachPriceCommand(
+        $command = new AttachPriceCommandHandler(
             $this->productRepository,
             $this->priceRepository,
             $this->eventDispatcher
         );
         $this->expectException(ProductNotFoundException::class);
-        $command->handle(new PriceAttachmentDto('not_found', $priceId));
+        $command->handle(new AttachPriceCommand('not_found', $priceId));
     }
 
     /**
@@ -63,20 +63,20 @@ class AttachPriceCommandTest extends TestCase
      */
     public function throwPriceNotFoundException()
     {
-        $productId         = 'product';
-        $product           = new Product(
+        $productId = 'product';
+        $product   = new Product(
             Identifier::create($productId),
             'product',
             'product'
         );
         $this->productRepository->save($product);
-        $command = new AttachPriceCommand(
+        $command = new AttachPriceCommandHandler(
             $this->productRepository,
             $this->priceRepository,
             $this->eventDispatcher
         );
         $this->expectException(PriceNotFoundException::class);
-        $command->handle(new PriceAttachmentDto($productId, 'not_found'));
+        $command->handle(new AttachPriceCommand($productId, 'not_found'));
     }
 
     /**
@@ -85,8 +85,8 @@ class AttachPriceCommandTest extends TestCase
     public function handle()
     {
         $this->eventDispatcher->expects($this->once())->method('dispatch');
-        $priceId           = 'price';
-        $price             = new Price(
+        $priceId = 'price';
+        $price   = new Price(
             Identifier::create($priceId),
             'price',
             'price',
@@ -94,19 +94,19 @@ class AttachPriceCommandTest extends TestCase
             Currency::create('EUR')
         );
         $this->priceRepository->save($price);
-        $productId         = 'product';
-        $product           = new Product(
+        $productId = 'product';
+        $product   = new Product(
             Identifier::create($productId),
             'product',
             'product'
         );
         $this->productRepository->save($product);
-        $command = new AttachPriceCommand(
+        $command = new AttachPriceCommandHandler(
             $this->productRepository,
             $this->priceRepository,
             $this->eventDispatcher
         );
-        $command->handle(new PriceAttachmentDto($productId, $priceId));
+        $command->handle(new AttachPriceCommand($productId, $priceId));
         $this->assertCount(1, $product->getPrices()->toArray());
     }
 }
