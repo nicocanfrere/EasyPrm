@@ -1,4 +1,4 @@
-.PHONY: up down app cs csf punit deptrac
+.PHONY: up down app cs csf punit deptrac stan
 
 up:
 	docker-compose -f .local/docker-compose.yml up --remove-orphans
@@ -14,3 +14,5 @@ punit:
 	php ./bin/phpunit
 deptrac:
 	./vendor/bin/deptrac
+stan:
+	./vendor/bin/phpstan analyse

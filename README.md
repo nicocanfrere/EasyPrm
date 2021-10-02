@@ -28,6 +28,13 @@ Don't forget to add **easy-prm.local** to your /etc/hosts file (linux users). Yo
 
 ## Tools
 
+### PHPStan [website](https://phpstan.org/)
+
+analyse *(see Makefile for real command)*:
+```bash
+make stan
+```
+
 ### PHP CodeSniffer [github](https://github.com/squizlabs/PHP_CodeSniffer)
 
 show report *(see Makefile for real command)*:
