@@ -1,0 +1,23 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\Core\:
+    resource: '../../src/EasyPrm/Core/'
+    exclude:
+      - '../../src/EasyPrm/Core/Contract/'
+      - '../../src/EasyPrm/Core/Event/'
+      - '../../src/EasyPrm/Core/Exception/'
+      - '../../src/EasyPrm/Core/ValueObject/'
+
+  EasyPrm\Core\Contract\IdentifierGeneratorInterface:
+    class: Application\EasyPrmBridge\Core\Generator\IdentifierGenerator
+
+  EasyPrm\Core\Contract\TransliteratorInterface:
+    class: Application\EasyPrmBridge\Core\Transliterator
+
+  EasyPrm\Core\Contract\IdentifierFactoryInterface:
+    class: EasyPrm\Core\Factory\IdentifierFactory
