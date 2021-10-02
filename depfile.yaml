@@ -1,0 +1,36 @@
+paths:
+    - ./src/EasyPrm
+exclude_files:
+    - '#.*test.*#'
+layers:
+    -
+        name: DoctrineCollection
+        collectors:
+            -
+                type: className
+                regex: Doctrine\\Common\\Collections\\.*
+    -
+        name: Psr
+        collectors:
+            -
+                type: className
+                regex: Psr\\.*
+    -
+        name: EasyPrmCore
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\Core\\.*
+    -
+        name: EasyPrmProductCatalog
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\ProductCatalog\\.*
+ruleset:
+    EasyPrmProductCatalog:
+        - EasyPrmCore
+        - Psr
+        - DoctrineCollection
+    EasyPrmCore:
+        - Psr

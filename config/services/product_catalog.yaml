@@ -1,0 +1,47 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\ProductCatalog\:
+    resource: '../../src/EasyPrm/ProductCatalog/'
+    exclude:
+      - '../../src/EasyPrm/ProductCatalog/Contract/'
+      - '../../src/EasyPrm/ProductCatalog/Exception/'
+      - '../../src/EasyPrm/ProductCatalog/ValueObject/'
+
+  EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog\ProductRepository
+  EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\ProductCatalog\PriceRepository
+  EasyPrm\ProductCatalog\Contract\PriceFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\PriceFactory
+  EasyPrm\ProductCatalog\Contract\ProductFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\ProductFactory
+
+  EasyPrm\ProductCatalog\Command\Price\CreateCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Price\CreateCommand'}
+  EasyPrm\ProductCatalog\Command\Price\RemoveCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Price\RemoveCommand'}
+  EasyPrm\ProductCatalog\Command\Price\UpdateCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Price\UpdateCommand'}
+  EasyPrm\ProductCatalog\Command\Product\CreateCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Product\CreateCommand'}
+  EasyPrm\ProductCatalog\Command\Product\RemoveCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Product\RemoveCommand'}
+  EasyPrm\ProductCatalog\Command\Product\UpdateCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Product\UpdateCommand'}
+  EasyPrm\ProductCatalog\Command\Product\AttachPriceCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Product\AttachPriceCommand'}
+  EasyPrm\ProductCatalog\Command\Product\DetachPriceCommandHandler:
+    tags:
+      - {name: 'messenger.message_handler', bus: 'command.bus', method: 'handle', handles: 'EasyPrm\ProductCatalog\Command\Product\DetachPriceCommand'}
