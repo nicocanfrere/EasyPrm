@@ -13,6 +13,22 @@
             <collectionOperation name="list">
                 <attribute name="method">get</attribute>
             </collectionOperation>
+            <collectionOperation name="attach_price">
+                <attribute name="method">post</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="path">/products/attach/price</attribute>
+                <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductAttachPriceController</attribute>
+            </collectionOperation>
+            <collectionOperation name="detach_price">
+                <attribute name="method">post</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="path">/products/detach/price</attribute>
+                <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductDetachPriceController</attribute>
+            </collectionOperation>
         </collectionOperations>
         <itemOperations>
             <itemOperation name="get">

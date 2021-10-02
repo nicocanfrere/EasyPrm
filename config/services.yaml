@@ -15,3 +15,6 @@ services:
             - '../src/Application/Entity/'
             - '../src/Application/Kernel.php'
             - '../src/Application/Tests/'
+    Application\Api\ProductCatalog\Controller\:
+        resource: '../src/Application/Api/ProductCatalog/Controller/'
+        tags: [ 'controller.service_arguments' ]

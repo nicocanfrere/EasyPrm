@@ -3,15 +3,15 @@
 namespace Application\Api\ProductCatalog\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
-use Application\Api\ProductCatalog\Dto\ProductInputDto;
-use EasyPrm\ProductCatalog\Command\Product\CreateCommand;
+use Application\Api\ProductCatalog\Dto\PriceInputDto;
+use EasyPrm\ProductCatalog\Command\Price\CreateCommand;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 /**
- * Class ProductDataPersister
+ * Class PriceDataPersister
  */
-class ProductDataPersister implements ContextAwareDataPersisterInterface
+class PriceDataPersister implements ContextAwareDataPersisterInterface
 {
     /**
      * @var MessageBusInterface
@@ -19,7 +19,7 @@ class ProductDataPersister implements ContextAwareDataPersisterInterface
     private $commandBus;
 
     /**
-     * ProductDataPersister constructor.
+     * PriceDataPersister constructor.
      *
      * @param MessageBusInterface $commandBus
      */
@@ -28,14 +28,13 @@ class ProductDataPersister implements ContextAwareDataPersisterInterface
         $this->commandBus = $commandBus;
     }
 
-
     public function supports($data, array $context = []): bool
     {
-        return $data instanceof ProductInputDto;
+        return $data instanceof PriceInputDto;
     }
 
     /**
-     * @param ProductInputDto $data
+     * @param PriceInputDto $data
      * @param array $context
      *
      * @return object
@@ -44,6 +43,8 @@ class ProductDataPersister implements ContextAwareDataPersisterInterface
     {
         $command = new CreateCommand();
         $command->label = $data->getLabel();
+        $command->amount = $data->getAmount();
+        $command->currency = $data->getCurrency();
         $envelope = $this->commandBus->dispatch($command);
         $handledStamp = $envelope->last(HandledStamp::class);
         if (!$handledStamp instanceof HandledStamp) {

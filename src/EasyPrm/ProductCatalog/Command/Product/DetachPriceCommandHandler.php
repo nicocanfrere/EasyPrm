@@ -4,6 +4,7 @@ namespace EasyPrm\ProductCatalog\Command\Product;
 
 use EasyPrm\Core\Contract\CommandHandlerInterface;
 use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
+use EasyPrm\ProductCatalog\Contract\ProductInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
 use EasyPrm\ProductCatalog\Event\PriceDetachedFromProduct;
 use EasyPrm\ProductCatalog\Exception\PriceNotFoundException;
@@ -39,10 +40,10 @@ class DetachPriceCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher   = $eventDispatcher;
     }
 
-    public function handle(DetachPriceCommand $priceAttachmentDto): void
+    public function handle(DetachPriceCommand $priceAttachmentDto): ?ProductInterface
     {
         if (!$priceAttachmentDto->productIdentifier || !$priceAttachmentDto->priceIdentifier) {
-            return;
+            return null;
         }
         $price = $this->priceRepository->oneByIdentifier($priceAttachmentDto->priceIdentifier);
         if (!$price) {
@@ -57,5 +58,7 @@ class DetachPriceCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher->dispatch(
             new PriceDetachedFromProduct($product, $price)
         );
+
+        return $product;
     }
 }
