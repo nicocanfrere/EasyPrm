@@ -1,6 +1,39 @@
 # EasyPrm
 
 [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) practice and exercise project based on the development of a [PRM](https://en.wikipedia.org/wiki/Partner_relationship_management) with [Symfony](https://symfony.com/)
+and [ApiPlatform](https://api-platform.com/)
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/nicocanfrere/EasyPrm.git
+```
+
+Install vendor *(on project root)*:
+
+```bash
+composer install
+```
+
+Run the containers *(on project root)*:
+
+```bash
+make up
+```
+
+Enter the php container *(on project root)*:
+
+```bash
+make app
+```
+
+In the container, run migrations:
+
+```bash
+php bin/console d:m:m
+```
 
 ## Local development environment - .local directory
 
