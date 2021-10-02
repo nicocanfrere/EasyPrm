@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EasyPrm\Core\Contract;
 
 /**

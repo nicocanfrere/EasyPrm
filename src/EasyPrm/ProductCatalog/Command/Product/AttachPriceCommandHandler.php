@@ -42,15 +42,15 @@ class AttachPriceCommandHandler implements CommandHandlerInterface
 
     public function handle(AttachPriceCommand $priceAttachmentDto): void
     {
-        if ( ! $priceAttachmentDto->productIdentifier || ! $priceAttachmentDto->priceIdentifier) {
+        if (! $priceAttachmentDto->productIdentifier || ! $priceAttachmentDto->priceIdentifier) {
             return;
         }
         $price = $this->priceRepository->oneByIdentifier($priceAttachmentDto->priceIdentifier);
-        if ( ! $price) {
+        if (! $price) {
             throw new PriceNotFoundException();
         }
         $product = $this->productRepository->oneByIdentifier($priceAttachmentDto->productIdentifier);
-        if ( ! $product) {
+        if (! $product) {
             throw new ProductNotFoundException();
         }
         $product->addPrice($price);
