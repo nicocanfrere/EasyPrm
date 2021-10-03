@@ -4,6 +4,7 @@ namespace EasyPrm\ProductCatalog\Command\Product;
 
 use EasyPrm\Core\Contract\CommandHandlerInterface;
 use EasyPrm\ProductCatalog\Contract\PriceRepositoryInterface;
+use EasyPrm\ProductCatalog\Contract\ProductInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
 use EasyPrm\ProductCatalog\Event\PriceAttachedToProduct;
 use EasyPrm\ProductCatalog\Exception\PriceNotFoundException;
@@ -40,10 +41,10 @@ class AttachPriceCommandHandler implements CommandHandlerInterface
     }
 
 
-    public function handle(AttachPriceCommand $priceAttachmentDto): void
+    public function handle(AttachPriceCommand $priceAttachmentDto): ?ProductInterface
     {
         if (! $priceAttachmentDto->productIdentifier || ! $priceAttachmentDto->priceIdentifier) {
-            return;
+            return null;
         }
         $price = $this->priceRepository->oneByIdentifier($priceAttachmentDto->priceIdentifier);
         if (! $price) {
@@ -58,5 +59,7 @@ class AttachPriceCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher->dispatch(
             new PriceAttachedToProduct($product, $price)
         );
+
+        return $product;
     }
 }

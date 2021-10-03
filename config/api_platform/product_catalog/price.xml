@@ -1,0 +1,50 @@
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="EasyPrm\ProductCatalog\Price">
+        <attribute name="normalization_context">
+            <attribute name="skip_null_values">false</attribute>
+        </attribute>
+        <collectionOperations>
+            <collectionOperation name="create">
+                <attribute name="method">post</attribute>
+                <attribute name="input">Application\Api\ProductCatalog\Dto\PriceInputDto</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>label</attribute>
+                                        <attribute>amount</attribute>
+                                        <attribute>currency</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="label">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="amount">
+                                            <attribute name="type">number</attribute>
+                                        </attribute>
+                                        <attribute name="currency">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="list">
+                <attribute name="method">get</attribute>
+            </collectionOperation>
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="method">get</attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

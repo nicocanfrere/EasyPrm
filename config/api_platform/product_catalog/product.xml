@@ -1,0 +1,106 @@
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="EasyPrm\ProductCatalog\Product">
+        <attribute name="normalization_context">
+            <attribute name="skip_null_values">false</attribute>
+        </attribute>
+        <collectionOperations>
+            <collectionOperation name="create">
+                <attribute name="method">post</attribute>
+                <attribute name="input">Application\Api\ProductCatalog\Dto\ProductInputDto</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>label</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="label">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="list">
+                <attribute name="method">get</attribute>
+            </collectionOperation>
+            <collectionOperation name="attach_price">
+                <attribute name="method">post</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="path">/products/attach/price</attribute>
+                <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductAttachPriceController</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Associate a price to a product</attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>product_identifier</attribute>
+                                        <attribute>price_identifier</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="product_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="price_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="detach_price">
+                <attribute name="method">post</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="path">/products/detach/price</attribute>
+                <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductDetachPriceController</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">De-associate a price from a product</attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>product_identifier</attribute>
+                                        <attribute>price_identifier</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="product_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="price_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="method">get</attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

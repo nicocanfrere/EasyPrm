@@ -38,7 +38,7 @@ class CreateCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function handle(CreateCommand $dto): void
+    public function handle(CreateCommand $dto)
     {
         //TODO data validation
         $exists = $this->priceRepository->oneByLabel($dto->label);
@@ -54,5 +54,7 @@ class CreateCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher->dispatch(
             new PriceCreatedEvent($price)
         );
+
+        return $price;
     }
 }
