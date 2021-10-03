@@ -2,6 +2,8 @@
 
 namespace EasyPrm\ProductCatalog\Command\Price;
 
+use EasyPrm\Core\Sanitizer\TextSanitizer;
+
 /**
  * Class CreateCommand
  */
@@ -21,7 +23,7 @@ class CreateCommand
 
     public function setLabel(?string $label): CreateCommand
     {
-        $this->label = $label;
+        $this->label = TextSanitizer::sanitize($label);
 
         return $this;
     }
@@ -45,7 +47,7 @@ class CreateCommand
 
     public function setCurrency(?string $currency): CreateCommand
     {
-        $this->currency = $currency;
+        $this->currency = TextSanitizer::sanitize($currency);
 
         return $this;
     }

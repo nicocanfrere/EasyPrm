@@ -2,6 +2,8 @@
 
 namespace EasyPrm\ProductCatalog\Command\Product;
 
+use EasyPrm\Core\Sanitizer\TextSanitizer;
+
 /**
  * Class CreateCommand
  */
@@ -17,7 +19,7 @@ class CreateCommand
 
     public function setLabel(?string $label): CreateCommand
     {
-        $this->label = $label;
+        $this->label = TextSanitizer::sanitize($label);
 
         return $this;
     }
