@@ -20,6 +20,26 @@
                 <attribute name="deserialize">false</attribute>
                 <attribute name="path">/products/attach/price</attribute>
                 <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductAttachPriceController</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Associate a price to a product</attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="product_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="price_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
             <collectionOperation name="detach_price">
                 <attribute name="method">post</attribute>
@@ -28,6 +48,26 @@
                 <attribute name="deserialize">false</attribute>
                 <attribute name="path">/products/detach/price</attribute>
                 <attribute name="controller">Application\Api\ProductCatalog\Controller\ProductDetachPriceController</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">De-associate a price from a product</attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="product_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="price_identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
         <itemOperations>
