@@ -9,6 +9,25 @@
             <collectionOperation name="create">
                 <attribute name="method">post</attribute>
                 <attribute name="input">Application\Api\ProductCatalog\Dto\ProductInputDto</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>label</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="label">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
             <collectionOperation name="list">
                 <attribute name="method">get</attribute>
@@ -27,6 +46,10 @@
                             <attribute name="application/json">
                                 <attribute name="schema">
                                     <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>product_identifier</attribute>
+                                        <attribute>price_identifier</attribute>
+                                    </attribute>
                                     <attribute name="properties">
                                         <attribute name="product_identifier">
                                             <attribute name="type">string</attribute>
@@ -55,6 +78,10 @@
                             <attribute name="application/json">
                                 <attribute name="schema">
                                     <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>product_identifier</attribute>
+                                        <attribute>price_identifier</attribute>
+                                    </attribute>
                                     <attribute name="properties">
                                         <attribute name="product_identifier">
                                             <attribute name="type">string</attribute>
