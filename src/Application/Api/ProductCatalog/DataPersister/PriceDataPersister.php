@@ -30,7 +30,15 @@ class PriceDataPersister implements ContextAwareDataPersisterInterface
 
     public function supports($data, array $context = []): bool
     {
-        return $data instanceof PriceInputDto;
+        if (
+            $data instanceof PriceInputDto &&
+            !empty($context['collection_operation_name']) &&
+            $context['collection_operation_name'] === 'create'
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

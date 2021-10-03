@@ -11,7 +11,7 @@ use EasyPrm\ProductCatalog\Product;
 class ProductInputDtoDataTransformer implements DataTransformerInterface
 {
 
-    public function transform($object, string $to, array $context = [])
+    public function transform($object, string $to, array $context = []): object
     {
         return $object;
     }

@@ -11,9 +11,8 @@ use EasyPrm\ProductCatalog\Price;
 class PriceInputDtoDataTransformer implements DataTransformerInterface
 {
 
-    public function transform($object, string $to, array $context = [])
+    public function transform($object, string $to, array $context = []): object
     {
-        //TODO validation
         return $object;
     }
 
