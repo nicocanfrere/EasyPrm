@@ -45,6 +45,39 @@
             <itemOperation name="get">
                 <attribute name="method">get</attribute>
             </itemOperation>
+            <itemOperation name="update">
+                <attribute name="method">patch</attribute>
+                <attribute name="input">Application\Api\ProductCatalog\Dto\PriceInputDto</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>identifier</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="label">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="amount">
+                                            <attribute name="type">number</attribute>
+                                        </attribute>
+                                        <attribute name="currency">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="identifier">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
     </resource>
 </resources>

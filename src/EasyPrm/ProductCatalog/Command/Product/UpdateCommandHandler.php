@@ -39,7 +39,7 @@ class UpdateCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher   = $eventDispatcher;
     }
 
-    public function handle(UpdateCommand $dto): void
+    public function handle(UpdateCommand $dto)
     {
         if (!$dto->identifier) {
             throw new \InvalidArgumentException();
@@ -58,9 +58,12 @@ class UpdateCommandHandler implements CommandHandlerInterface
                 ->setLabel($dto->label)
                 ->setAlias($this->transliterator->transliterate($dto->label));
         }
+        $original->setUpdatedAt(new \DateTime());
         $this->productRepository->save($original);
         $this->eventDispatcher->dispatch(
             new ProductUpdatedEvent($original, $old)
         );
+
+        return $original;
     }
 }

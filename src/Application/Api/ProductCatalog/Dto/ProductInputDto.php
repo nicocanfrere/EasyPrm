@@ -9,6 +9,8 @@ class ProductInputDto
 {
     /** @var string|null */
     private $label;
+    /** @var string|null */
+    private $identifier;
 
     public function getLabel(): ?string
     {
@@ -18,6 +20,18 @@ class ProductInputDto
     public function setLabel(?string $label): ProductInputDto
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(?string $identifier): ProductInputDto
+    {
+        $this->identifier = $identifier;
 
         return $this;
     }

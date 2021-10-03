@@ -41,7 +41,7 @@ class UpdateCommandHandler implements CommandHandlerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function handle(UpdateCommand $dto): void
+    public function handle(UpdateCommand $dto)
     {
         if (!$dto->getIdentifier()) {
             throw new \InvalidArgumentException();
@@ -72,9 +72,12 @@ class UpdateCommandHandler implements CommandHandlerInterface
                 $original->setCurrency($currency);
             }
         }
+        $original->setUpdatedAt(new \DateTime());
         $this->priceRepository->save($original);
         $this->eventDispatcher->dispatch(
             new PriceUpdatedEvent($original, $old)
         );
+
+        return $original;
     }
 }

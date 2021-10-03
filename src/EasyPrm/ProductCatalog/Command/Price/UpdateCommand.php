@@ -2,6 +2,7 @@
 
 namespace EasyPrm\ProductCatalog\Command\Price;
 
+use EasyPrm\Core\Sanitizer\TextSanitizer;
 use EasyPrm\Core\ValueObject\Identifier;
 
 /**
@@ -25,7 +26,7 @@ class UpdateCommand
 
     public function setLabel(?string $label): UpdateCommand
     {
-        $this->label = $label;
+        $this->label = TextSanitizer::sanitize($label);
 
         return $this;
     }
@@ -49,7 +50,7 @@ class UpdateCommand
 
     public function setCurrency(?string $currency): UpdateCommand
     {
-        $this->currency = $currency;
+        $this->currency = TextSanitizer::sanitize($currency);
 
         return $this;
     }
