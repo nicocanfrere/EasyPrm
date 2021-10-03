@@ -8,5 +8,17 @@ namespace EasyPrm\ProductCatalog\Command\Product;
 class CreateCommand
 {
     /** @var string|null */
-    public $label;
+    private $label;
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): CreateCommand
+    {
+        $this->label = $label;
+
+        return $this;
+    }
 }

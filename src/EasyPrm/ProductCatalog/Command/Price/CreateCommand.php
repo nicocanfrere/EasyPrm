@@ -8,9 +8,45 @@ namespace EasyPrm\ProductCatalog\Command\Price;
 class CreateCommand
 {
     /** @var string|null */
-    public $label;
+    private $label;
     /** @var mixed */
-    public $amount;
+    private $amount;
     /** @var string|null */
-    public $currency;
+    private $currency;
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): CreateCommand
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function setAmount($amount): CreateCommand
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): CreateCommand
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
 }

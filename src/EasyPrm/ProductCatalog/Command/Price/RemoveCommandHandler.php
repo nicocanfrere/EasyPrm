@@ -34,10 +34,10 @@ class RemoveCommandHandler implements CommandHandlerInterface
 
     public function handle(RemoveCommand $dto): void
     {
-        if (!$dto->identifier) {
+        if (!$dto->getIdentifier()) {
             throw new \InvalidArgumentException();
         }
-        $price = $this->priceRepository->oneByIdentifier($dto->identifier);
+        $price = $this->priceRepository->oneByIdentifier($dto->getIdentifier());
         if (!$price) {
             throw new PriceNotFoundException();
         }

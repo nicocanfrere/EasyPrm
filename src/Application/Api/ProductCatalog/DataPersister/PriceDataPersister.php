@@ -50,9 +50,9 @@ class PriceDataPersister implements ContextAwareDataPersisterInterface
     public function persist($data, array $context = [])
     {
         $command = new CreateCommand();
-        $command->label = $data->getLabel();
-        $command->amount = $data->getAmount();
-        $command->currency = $data->getCurrency();
+        $command->setLabel($data->getLabel());
+        $command->setAmount($data->getAmount());
+        $command->setCurrency($data->getCurrency());
         $envelope = $this->commandBus->dispatch($command);
         $handledStamp = $envelope->last(HandledStamp::class);
         if (!$handledStamp instanceof HandledStamp) {

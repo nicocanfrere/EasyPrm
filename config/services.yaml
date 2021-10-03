@@ -18,3 +18,7 @@ services:
     Application\Api\ProductCatalog\Controller\:
         resource: '../src/Application/Api/ProductCatalog/Controller/'
         tags: [ 'controller.service_arguments' ]
+
+    Application\Api\Listener\ValidationListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 500}

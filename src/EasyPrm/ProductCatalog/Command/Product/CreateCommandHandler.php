@@ -5,6 +5,7 @@ namespace EasyPrm\ProductCatalog\Command\Product;
 use EasyPrm\Core\Contract\CommandHandlerInterface;
 use EasyPrm\ProductCatalog\Contract\ProductFactoryInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
+use EasyPrm\ProductCatalog\Contract\ProductValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Event\ProductCreatedEvent;
 use EasyPrm\ProductCatalog\Exception\ProductAlreadyExistsException;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -20,32 +21,33 @@ class CreateCommandHandler implements CommandHandlerInterface
     private $productRepository;
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
+    /** @var ProductValidatorFactoryInterface */
+    private $productValidatorFactory;
 
     /**
      * CreateCommand constructor.
      *
      * @param ProductFactoryInterface $productFactory
+     * @param ProductValidatorFactoryInterface $productValidatorFactory
      * @param ProductRepositoryInterface $productRepository
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         ProductFactoryInterface $productFactory,
+        ProductValidatorFactoryInterface $productValidatorFactory,
         ProductRepositoryInterface $productRepository,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->productFactory    = $productFactory;
         $this->productRepository = $productRepository;
         $this->eventDispatcher   = $eventDispatcher;
+        $this->productValidatorFactory = $productValidatorFactory;
     }
 
     public function handle(CreateCommand $dto)
     {
-        //TODO data validation
-        $exists = $this->productRepository->oneByLabel($dto->label);
-        if ($exists) {
-            throw new ProductAlreadyExistsException();
-        }
-        $product = $this->productFactory->create($dto->label);
+        $this->productValidatorFactory->create()->validate($dto);
+        $product = $this->productFactory->create($dto->getLabel());
         $this->productRepository->save($product);
         $this->eventDispatcher->dispatch(
             new ProductCreatedEvent($product)

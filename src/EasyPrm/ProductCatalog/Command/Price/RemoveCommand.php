@@ -10,5 +10,17 @@ use EasyPrm\Core\ValueObject\Identifier;
 class RemoveCommand
 {
     /** @var Identifier|null */
-    public $identifier;
+    private $identifier;
+
+    public function getIdentifier(): ?Identifier
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(?Identifier $identifier): RemoveCommand
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
 }

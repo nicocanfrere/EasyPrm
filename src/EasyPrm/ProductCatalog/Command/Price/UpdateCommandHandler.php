@@ -43,31 +43,31 @@ class UpdateCommandHandler implements CommandHandlerInterface
 
     public function handle(UpdateCommand $dto): void
     {
-        if (!$dto->identifier) {
+        if (!$dto->getIdentifier()) {
             throw new \InvalidArgumentException();
         }
-        $original = $this->priceRepository->oneByIdentifier($dto->identifier);
+        $original = $this->priceRepository->oneByIdentifier($dto->getIdentifier());
         if (!$original) {
             throw new PriceNotFoundException();
         }
         $old = clone $original;
-        if ($dto->label && $dto->label !== $original->getLabel()) {
-            $exists = $this->priceRepository->oneByLabel($dto->label);
+        if ($dto->getLabel() && $dto->getLabel() !== $original->getLabel()) {
+            $exists = $this->priceRepository->oneByLabel($dto->getLabel());
             if ($exists && !$exists->getIdentifier()->equals($original->getIdentifier())) {
                 throw new PriceAlreadyExistsException();
             }
             $original
-                ->setLabel($dto->label)
-                ->setAlias($this->transliterator->transliterate($dto->label));
+                ->setLabel($dto->getLabel())
+                ->setAlias($this->transliterator->transliterate($dto->getLabel()));
         }
-        if ($dto->amount !== null) {
-            $amount = Amount::create($dto->amount);
+        if ($dto->getAmount() !== null) {
+            $amount = Amount::create($dto->getAmount());
             if (!$amount->equals($original->getAmount())) {
                 $original->setAmount($amount);
             }
         }
-        if ($dto->currency) {
-            $currency = Currency::create($dto->currency);
+        if ($dto->getCurrency()) {
+            $currency = Currency::create($dto->getCurrency());
             if (!$currency->equals($original->getCurrency())) {
                 $original->setCurrency($currency);
             }

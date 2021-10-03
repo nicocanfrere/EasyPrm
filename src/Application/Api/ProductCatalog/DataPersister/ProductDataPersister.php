@@ -51,7 +51,7 @@ class ProductDataPersister implements ContextAwareDataPersisterInterface
     public function persist($data, array $context = [])
     {
         $command = new CreateCommand();
-        $command->label = $data->getLabel();
+        $command->setLabel($data->getLabel());
         $envelope = $this->commandBus->dispatch($command);
         $handledStamp = $envelope->last(HandledStamp::class);
         if (!$handledStamp instanceof HandledStamp) {

@@ -10,11 +10,59 @@ use EasyPrm\Core\ValueObject\Identifier;
 class UpdateCommand
 {
     /** @var string|null */
-    public $label;
+    private $label;
     /** @var mixed */
-    public $amount;
+    private $amount;
     /** @var string|null */
-    public $currency;
+    private $currency;
     /** @var Identifier|null */
-    public $identifier;
+    private $identifier;
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): UpdateCommand
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function setAmount($amount): UpdateCommand
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): UpdateCommand
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getIdentifier(): ?Identifier
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(?Identifier $identifier): UpdateCommand
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
 }
