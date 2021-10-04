@@ -3,8 +3,9 @@
 
 namespace EasyPrm\Partner\Contract;
 
+use EasyPrm\AddressBook\Contract\AddressBookInterface;
 use EasyPrm\Core\ValueObject\Identifier;
-use EasyPrm\Partner\PartnerUser;
+use EasyPrm\PhoneBook\Contract\PhoneBookInterface;
 
 /**
  * Interface PartnerUserInterface
@@ -39,4 +40,12 @@ interface PartnerUserInterface
     public function getPartnerAccount(): ?PartnerAccountInterface;
 
     public function setPartnerAccount(?PartnerAccountInterface $partnerAccount): PartnerUserInterface;
+
+    public function getAddressBook(): ?AddressBookInterface;
+
+    public function setAddressBook(?AddressBookInterface $addressBook): PartnerUserInterface;
+
+    public function getPhoneBook(): ?PhoneBookInterface;
+
+    public function setPhoneBook(?PhoneBookInterface $phoneBook): PartnerUserInterface;
 }

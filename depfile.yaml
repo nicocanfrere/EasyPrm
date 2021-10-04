@@ -60,5 +60,7 @@ ruleset:
         - EasyPrmCore
         - Psr
         - DoctrineCollection
+        - EasyPrmAddressBook
+        - EasyPrmPhoneBook
     EasyPrmCore:
         - Psr

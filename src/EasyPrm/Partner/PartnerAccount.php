@@ -2,9 +2,11 @@
 
 namespace EasyPrm\Partner;
 
+use EasyPrm\AddressBook\Contract\AddressBookInterface;
 use EasyPrm\Core\Contract\TimestampableTrait;
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\Partner\Contract\PartnerAccountInterface;
+use EasyPrm\PhoneBook\Contract\PhoneBookInterface;
 
 /**
  * Class PartnerAccount
@@ -21,6 +23,10 @@ class PartnerAccount implements PartnerAccountInterface
     private $label;
     /** @var string|null */
     private $companyNumber;
+    /** @var AddressBookInterface|null */
+    private $addressBook;
+    /** @var PhoneBookInterface|null */
+    private $phoneBook;
 
     public function __construct()
     {
@@ -72,6 +78,30 @@ class PartnerAccount implements PartnerAccountInterface
     public function setCompanyNumber(?string $companyNumber): PartnerAccountInterface
     {
         $this->companyNumber = $companyNumber;
+
+        return $this;
+    }
+
+    public function getAddressBook(): ?AddressBookInterface
+    {
+        return $this->addressBook;
+    }
+
+    public function setAddressBook(?AddressBookInterface $addressBook): PartnerAccountInterface
+    {
+        $this->addressBook = $addressBook;
+
+        return $this;
+    }
+
+    public function getPhoneBook(): ?PhoneBookInterface
+    {
+        return $this->phoneBook;
+    }
+
+    public function setPhoneBook(?PhoneBookInterface $phoneBook): PartnerAccountInterface
+    {
+        $this->phoneBook = $phoneBook;
 
         return $this;
     }
