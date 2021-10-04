@@ -16,6 +16,10 @@ interface PartnerAccountInterface
 
     public function getIdentifier(): ?Identifier;
 
+    public function setAccountNumber(?string $accountNumber): PartnerAccountInterface;
+
+    public function getAccountNumber(): ?string;
+
     public function setLabel(?string $label): PartnerAccountInterface;
 
     public function getLabel(): ?string;

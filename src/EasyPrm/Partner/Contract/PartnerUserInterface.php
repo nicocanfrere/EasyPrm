@@ -16,6 +16,10 @@ interface PartnerUserInterface
 
     public function setIdentifier(?Identifier $identifier): PartnerUserInterface;
 
+    public function getAccountNumber(): ?string;
+
+    public function setAccountNumber(?string $accountNumber): PartnerUserInterface;
+
     public function getGender(): ?int;
 
     public function setGender(?int $gender): PartnerUserInterface;

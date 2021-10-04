@@ -16,6 +16,8 @@ class PartnerAccount implements PartnerAccountInterface
     /** @var Identifier|null */
     private $identifier;
     /** @var string|null */
+    private $accountNumber;
+    /** @var string|null */
     private $label;
     /** @var string|null */
     private $companyNumber;
@@ -34,6 +36,18 @@ class PartnerAccount implements PartnerAccountInterface
     public function setIdentifier(?Identifier $identifier): PartnerAccountInterface
     {
         $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    public function getAccountNumber(): ?string
+    {
+        return $this->accountNumber;
+    }
+
+    public function setAccountNumber(?string $accountNumber): PartnerAccountInterface
+    {
+        $this->accountNumber = $accountNumber;
 
         return $this;
     }

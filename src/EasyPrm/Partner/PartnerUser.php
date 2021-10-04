@@ -16,6 +16,8 @@ class PartnerUser implements PartnerUserInterface
 
     /** @var Identifier|null */
     private $identifier;
+    /** @var string|null */
+    private $accountNumber;
     /** @var int|null */
     private $gender;
     /** @var string|null */
@@ -41,6 +43,18 @@ class PartnerUser implements PartnerUserInterface
     public function setIdentifier(?Identifier $identifier): PartnerUserInterface
     {
         $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    public function getAccountNumber(): ?string
+    {
+        return $this->accountNumber;
+    }
+
+    public function setAccountNumber(?string $accountNumber): PartnerUserInterface
+    {
+        $this->accountNumber = $accountNumber;
 
         return $this;
     }
