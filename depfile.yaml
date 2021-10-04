@@ -22,6 +22,18 @@ layers:
                 type: className
                 regex: EasyPrm\\Core\\.*
     -
+        name: EasyPrmAddressBook
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\AddressBook\\.*
+    -
+        name: EasyPrmPhoneBook
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\PhoneBook\\.*
+    -
         name: EasyPrmPartner
         collectors:
             -
@@ -34,6 +46,12 @@ layers:
                 type: className
                 regex: EasyPrm\\ProductCatalog\\.*
 ruleset:
+    EasyPrmAddressBook:
+        - EasyPrmCore
+        - Psr
+    EasyPrmPhoneBook:
+        - EasyPrmCore
+        - Psr
     EasyPrmProductCatalog:
         - EasyPrmCore
         - Psr
