@@ -1,0 +1,16 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\PhoneNumberBook\:
+    resource: '../../src/EasyPrm/PhoneNumberBook/'
+    exclude:
+      - '../../src/EasyPrm/PhoneNumberBook/Contract/'
+
+  EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\PhoneNumberBook\PhoneNumberBookRepository
+  EasyPrm\PhoneNumberBook\Contract\PhoneNumberRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\PhoneNumberBook\PhoneNumberRepository

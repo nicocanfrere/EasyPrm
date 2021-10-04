@@ -1,0 +1,17 @@
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="EasyPrm\PhoneNumberBook\PhoneNumberBook">
+        <attribute name="normalization_context">
+            <attribute name="skip_null_values">false</attribute>
+        </attribute>
+        <collectionOperation name="list">
+            <attribute name="method">get</attribute>
+        </collectionOperation>
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="method">get</attribute>
+            </itemOperation>
+        </itemOperations>
+    </resource>
+</resources>

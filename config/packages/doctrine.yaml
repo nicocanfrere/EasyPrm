@@ -24,3 +24,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Infrastructure/Database/Orm/Doctrine/Config/ProductCatalog/'
                 prefix: 'EasyPrm\ProductCatalog'
                 alias: ProductCatalog
+            EasyPrm\PhoneNumberBook:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Database/Orm/Doctrine/Config/PhoneNumberBook/'
+                prefix: 'EasyPrm\PhoneNumberBook'
+                alias: PhoneNumberBook
