@@ -1,11 +1,10 @@
 <?php
 
-
 namespace EasyPrm\Partner\Contract;
 
 use EasyPrm\AddressBook\Contract\AddressBookInterface;
 use EasyPrm\Core\ValueObject\Identifier;
-use EasyPrm\PhoneBook\Contract\PhoneBookInterface;
+use EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookInterface;
 
 /**
  * Interface PartnerAccountInterface
@@ -33,7 +32,7 @@ interface PartnerAccountInterface
 
     public function setAddressBook(?AddressBookInterface $addressBook): PartnerAccountInterface;
 
-    public function getPhoneBook(): ?PhoneBookInterface;
+    public function getPhoneBook(): ?PhoneNumberBookInterface;
 
-    public function setPhoneBook(?PhoneBookInterface $phoneBook): PartnerAccountInterface;
+    public function setPhoneBook(?PhoneNumberBookInterface $phoneBook): PartnerAccountInterface;
 }
