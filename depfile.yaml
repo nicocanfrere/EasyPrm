@@ -22,6 +22,12 @@ layers:
                 type: className
                 regex: EasyPrm\\Core\\.*
     -
+        name: EasyPrmPartner
+        collectors:
+            -
+                type: className
+                regex: EasyPrm\\Partner\\.*
+    -
         name: EasyPrmProductCatalog
         collectors:
             -
@@ -29,6 +35,10 @@ layers:
                 regex: EasyPrm\\ProductCatalog\\.*
 ruleset:
     EasyPrmProductCatalog:
+        - EasyPrmCore
+        - Psr
+        - DoctrineCollection
+    EasyPrmPartner:
         - EasyPrmCore
         - Psr
         - DoctrineCollection
