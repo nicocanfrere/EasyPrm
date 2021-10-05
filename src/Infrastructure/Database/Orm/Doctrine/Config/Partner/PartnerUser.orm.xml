@@ -1,0 +1,26 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="EasyPrm\Partner\PartnerUser" table="partner_partner_user" repository-class="EasyPrm\Partner\Contract\PartnerUserRepositoryInterface">
+        <id name="identifier" type="identifier">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="accountNumber" type="string" column="account_number" nullable="true"/>
+        <field name="gender" type="integer" column="gender" nullable="true"/>
+        <field name="firstName" type="string" column="first_name" nullable="true"/>
+        <field name="lastName" type="string" column="last_name" nullable="true"/>
+        <field name="email" type="string" column="email" nullable="true"/>
+        <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
+        <many-to-one field="partnerAccount">
+            <join-column name="partner_account_identifier" referenced-column-name="identifier" on-delete="SET NULL" nullable="true"/>
+        </many-to-one>
+        <one-to-one field="addressBook" target-entity="EasyPrm\AddressBook\AddressBook">
+            <join-column name="address_book_identifier" referenced-column-name="identifier" on-delete="SET NULL" nullable="true"/>
+        </one-to-one>
+        <one-to-one field="phoneBook" target-entity="EasyPrm\PhoneNumberBook\PhoneNumberBook">
+            <join-column name="phone_book_identifier" referenced-column-name="identifier" on-delete="SET NULL" nullable="true"/>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

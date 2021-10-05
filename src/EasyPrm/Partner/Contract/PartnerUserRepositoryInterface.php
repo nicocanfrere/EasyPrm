@@ -8,7 +8,7 @@ namespace EasyPrm\Partner\Contract;
  */
 interface PartnerUserRepositoryInterface
 {
-    public function save(PartnerUserInterface $phoneNumberBook): void;
-    public function remove(PartnerUserInterface $phoneNumberBook): void;
+    public function save(PartnerUserInterface $partnerUser): void;
+    public function remove(PartnerUserInterface $partnerUser): void;
     public function oneByIdentifier($identifier): ?PartnerUserInterface;
 }

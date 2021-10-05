@@ -24,6 +24,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Infrastructure/Database/Orm/Doctrine/Config/AddressBook/'
                 prefix: 'EasyPrm\AddressBook'
                 alias: AddressBook
+            EasyPrm\Partner:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Database/Orm/Doctrine/Config/Partner/'
+                prefix: 'EasyPrm\Partner'
+                alias: Partner
             EasyPrm\PhoneNumberBook:
                 is_bundle: false
                 type: xml

@@ -1,0 +1,18 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\Partner\:
+    resource: '../../src/EasyPrm/Partner/'
+    exclude:
+      - '../../src/EasyPrm/Partner/Contract/'
+      - '../../src/EasyPrm/Partner/Event/'
+      - '../../src/EasyPrm/Partner/Exception/'
+
+  EasyPrm\Partner\Contract\PartnerAccountRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\Partner\PartnerAccountRepository
+  EasyPrm\Partner\Contract\PartnerUserRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\Partner\PartnerUserRepository
