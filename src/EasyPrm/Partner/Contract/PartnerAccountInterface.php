@@ -4,6 +4,7 @@ namespace EasyPrm\Partner\Contract;
 
 use EasyPrm\AddressBook\Contract\AddressBookInterface;
 use EasyPrm\Core\ValueObject\Identifier;
+use EasyPrm\Partner\PartnerAccount;
 use EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookInterface;
 
 /**
@@ -23,6 +24,10 @@ interface PartnerAccountInterface
     public function setLabel(?string $label): PartnerAccountInterface;
 
     public function getLabel(): ?string;
+
+    public function getAlias(): ?string;
+
+    public function setAlias(?string $alias): PartnerAccountInterface;
 
     public function setCompanyNumber(?string $companyNumber): PartnerAccountInterface;
 

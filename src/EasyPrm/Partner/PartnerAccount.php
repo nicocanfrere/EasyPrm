@@ -22,6 +22,8 @@ class PartnerAccount implements PartnerAccountInterface
     /** @var string|null */
     private $label;
     /** @var string|null */
+    private $alias;
+    /** @var string|null */
     private $companyNumber;
     /** @var AddressBookInterface|null */
     private $addressBook;
@@ -66,6 +68,18 @@ class PartnerAccount implements PartnerAccountInterface
     public function setLabel(?string $label): PartnerAccountInterface
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(?string $alias): PartnerAccountInterface
+    {
+        $this->alias = $alias;
 
         return $this;
     }
