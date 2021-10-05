@@ -1,0 +1,13 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="EasyPrm\AddressBook\AddressBook" table="address_books" repository-class="EasyPrm\AddressBook\Contract\AddressBookRepositoryInterface">
+        <id name="identifier" type="identifier">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
+        <one-to-many field="addresses" target-entity="EasyPrm\AddressBook\Address" mapped-by="addressBook"/>
+    </entity>
+</doctrine-mapping>

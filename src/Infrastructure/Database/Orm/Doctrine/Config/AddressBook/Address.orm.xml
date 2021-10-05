@@ -1,0 +1,26 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="EasyPrm\AddressBook\Address" table="address_book_addresses" repository-class="EasyPrm\AddressBook\Contract\AddressRepositoryInterface">
+        <id name="identifier" type="identifier">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="label" type="string" column="label" nullable="true"/>
+        <field name="ownerGender" type="integer" column="gender" nullable="true"/>
+        <field name="ownerFirstName" type="string" column="owner_first_name" nullable="true"/>
+        <field name="ownerLastName" type="string" column="owner_last_name" nullable="true"/>
+        <field name="street" type="string" column="street" nullable="true"/>
+        <field name="complementOne" type="text" column="complement_one" nullable="true"/>
+        <field name="complementTwo" type="text" column="complement_two" nullable="true"/>
+        <field name="city" type="string" column="city" nullable="true"/>
+        <field name="postalCode" type="string" column="postal_code" nullable="true" length="20"/>
+        <field name="region" type="string" column="region" nullable="true"/>
+        <field name="countryCode" type="string" column="country_code" nullable="true" length="3"/>
+        <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
+        <many-to-one field="addressBook" target-entity="EasyPrm\AddressBook\AddressBook" inversed-by="addresses">
+            <join-column name="address_book_id" referenced-column-name="identifier"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
