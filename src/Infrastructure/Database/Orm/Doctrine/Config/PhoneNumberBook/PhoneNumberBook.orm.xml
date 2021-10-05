@@ -2,7 +2,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="EasyPrm\PhoneNumberBook\PhoneNumberBook" table="phone_number_books" repository-class="EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookInterface">
+    <entity name="EasyPrm\PhoneNumberBook\PhoneNumberBook" table="phone_number_books" repository-class="EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookRepositoryInterface">
         <id name="identifier" type="identifier">
             <generator strategy="NONE"/>
         </id>
