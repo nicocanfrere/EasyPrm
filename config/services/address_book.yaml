@@ -1,0 +1,16 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  EasyPrm\AddressBook\:
+    resource: '../../src/EasyPrm/AddressBook/'
+    exclude:
+      - '../../src/EasyPrm/AddressBook/Contract/'
+
+  EasyPrm\AddressBook\Contract\AddressBookRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\AddressBook\AddressBookRepository
+  EasyPrm\AddressBook\Contract\AddressRepositoryInterface:
+    class: Infrastructure\Database\Orm\Doctrine\Repository\AddressBook\AddressRepository
