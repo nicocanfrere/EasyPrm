@@ -13,7 +13,7 @@
         <field name="email" type="string" column="email" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
-        <many-to-one field="partnerAccount">
+        <many-to-one field="partnerAccount" target-entity="EasyPrm\Partner\PartnerAccount">
             <join-column name="partner_account_identifier" referenced-column-name="identifier" on-delete="SET NULL" nullable="true"/>
         </many-to-one>
         <one-to-one field="addressBook" target-entity="EasyPrm\AddressBook\AddressBook">
