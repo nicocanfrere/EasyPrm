@@ -4,6 +4,7 @@ namespace EasyPrm\Partner\Contract;
 
 use EasyPrm\AddressBook\Contract\AddressBookInterface;
 use EasyPrm\Core\ValueObject\Identifier;
+use EasyPrm\Partner\PartnerUser;
 use EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookInterface;
 
 /**
@@ -47,4 +48,12 @@ interface PartnerUserInterface
     public function getPhoneBook(): ?PhoneNumberBookInterface;
 
     public function setPhoneBook(?PhoneNumberBookInterface $phoneBook): PartnerUserInterface;
+
+    public function getPreferredLanguage(): ?string;
+
+    public function setPreferredLanguage(?string $preferredLanguage): PartnerUserInterface;
+
+    public function getTimeZone(): ?string;
+
+    public function setTimeZone(?string $timeZone): PartnerUserInterface;
 }

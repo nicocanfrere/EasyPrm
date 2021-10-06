@@ -13,6 +13,8 @@
         <field name="email" type="string" column="email" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime_immutable" nullable="true"/>
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true"/>
+        <field name="preferredLanguage" column="preferred_language" type="string" nullable="true"/>
+        <field name="timeZone" column="time_zone" type="string" nullable="true"/>
         <many-to-one field="partnerAccount" target-entity="EasyPrm\Partner\PartnerAccount">
             <join-column name="partner_account_identifier" referenced-column-name="identifier" on-delete="SET NULL" nullable="true"/>
         </many-to-one>

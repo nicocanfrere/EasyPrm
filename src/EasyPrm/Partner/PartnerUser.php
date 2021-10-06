@@ -34,6 +34,10 @@ class PartnerUser implements PartnerUserInterface
     private $addressBook;
     /** @var PhoneNumberBookInterface|null */
     private $phoneBook;
+    /** @var string|null */
+    private $preferredLanguage;
+    /** @var string|null */
+    private $timeZone;
 
     public function __construct()
     {
@@ -145,6 +149,30 @@ class PartnerUser implements PartnerUserInterface
     public function setPhoneBook(?PhoneNumberBookInterface $phoneBook): PartnerUserInterface
     {
         $this->phoneBook = $phoneBook;
+
+        return $this;
+    }
+
+    public function getPreferredLanguage(): ?string
+    {
+        return $this->preferredLanguage;
+    }
+
+    public function setPreferredLanguage(?string $preferredLanguage): PartnerUserInterface
+    {
+        $this->preferredLanguage = $preferredLanguage;
+
+        return $this;
+    }
+
+    public function getTimeZone(): ?string
+    {
+        return $this->timeZone;
+    }
+
+    public function setTimeZone(?string $timeZone): PartnerUserInterface
+    {
+        $this->timeZone = $timeZone;
 
         return $this;
     }
