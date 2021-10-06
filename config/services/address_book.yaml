@@ -14,3 +14,5 @@ services:
     class: Infrastructure\Database\Orm\Doctrine\Repository\AddressBook\AddressBookRepository
   EasyPrm\AddressBook\Contract\AddressRepositoryInterface:
     class: Infrastructure\Database\Orm\Doctrine\Repository\AddressBook\AddressRepository
+  EasyPrm\AddressBook\Contract\AddressBookFactoryInterface:
+    class: EasyPrm\AddressBook\Factory\AddressBookFactory
