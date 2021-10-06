@@ -14,3 +14,5 @@ services:
     class: Infrastructure\Database\Orm\Doctrine\Repository\PhoneNumberBook\PhoneNumberBookRepository
   EasyPrm\PhoneNumberBook\Contract\PhoneNumberRepositoryInterface:
     class: Infrastructure\Database\Orm\Doctrine\Repository\PhoneNumberBook\PhoneNumberRepository
+  EasyPrm\PhoneNumberBook\Contract\PhoneNumberBookFactoryInterface:
+    class: EasyPrm\PhoneNumberBook\Factory\PhoneNumberBookFactory
