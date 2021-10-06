@@ -5,9 +5,37 @@
         <attribute name="normalization_context">
             <attribute name="skip_null_values">false</attribute>
         </attribute>
-        <collectionOperation name="list">
-            <attribute name="method">get</attribute>
-        </collectionOperation>
+        <collectionOperations>
+            <collectionOperation name="list">
+                <attribute name="method">get</attribute>
+            </collectionOperation>
+            <collectionOperation name="create">
+                <attribute name="method">post</attribute>
+                <attribute name="input">Application\Api\Partner\Dto\PartnerAccountInputDto</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="application/json">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="required">
+                                        <attribute>label</attribute>
+                                    </attribute>
+                                    <attribute name="properties">
+                                        <attribute name="label">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="companyNumber">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
         <itemOperations>
             <itemOperation name="get">
                 <attribute name="method">get</attribute>
