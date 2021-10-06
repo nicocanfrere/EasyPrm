@@ -59,12 +59,14 @@ class ProductDataPersister implements ContextAwareDataPersisterInterface
      */
     public function persist($data, array $context = [])
     {
-        if (!empty($context['collection_operation_name']) &&
+        if (
+            !empty($context['collection_operation_name']) &&
             $context['collection_operation_name'] === 'create'
         ) {
             return $this->create($data);
         }
-        if (!empty($context['item_operation_name']) &&
+        if (
+            !empty($context['item_operation_name']) &&
             $context['item_operation_name'] === 'update'
         ) {
             return $this->update($data);

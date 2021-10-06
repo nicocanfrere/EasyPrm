@@ -48,7 +48,7 @@ class CreateProductCommand extends Command
             $io->success('Product ' . $input->getArgument(self::ARG_LABEL) . ' created');
 
             return Command::SUCCESS;
-        } catch (HandlerFailedException|ValidationException $exception) {
+        } catch (HandlerFailedException | ValidationException $exception) {
             if ($exception instanceof HandlerFailedException) {
                 $exception = $exception->getPrevious();
             }
