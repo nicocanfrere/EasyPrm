@@ -6,7 +6,7 @@
         <id name="identifier" type="identifier">
             <generator strategy="NONE"/>
         </id>
-        <field name="accountNumber" type="string" column="account_number" nullable="true"/>
+        <field name="accountNumber" type="partner_account_number" column="account_number" nullable="true"/>
         <field name="label" type="string" column="label" nullable="true"/>
         <field name="alias" type="string" column="alias" nullable="true"/>
         <field name="companyNumber" type="string" column="company_number" nullable="true"/>

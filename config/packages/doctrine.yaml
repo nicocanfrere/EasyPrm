@@ -8,10 +8,12 @@ doctrine:
                     identifier: string
                     amount: integer
                     currency: string
+                    partner_account_number: string
         types:
             identifier: Infrastructure\Database\Orm\Doctrine\Type\IdentifierType
             amount: Infrastructure\Database\Orm\Doctrine\Type\AmountType
             currency: Infrastructure\Database\Orm\Doctrine\Type\CurrencyType
+            partner_account_number: Infrastructure\Database\Orm\Doctrine\Type\PartnerAccountNumberType
     orm:
         default_entity_manager: default
         auto_generate_proxy_classes: true
