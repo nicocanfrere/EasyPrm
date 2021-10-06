@@ -3,17 +3,13 @@
 namespace EasyPrm\Tests\ProductCatalog\Command\Price;
 
 use EasyPrm\Core\Contract\IdentifierFactoryInterface;
-use EasyPrm\Core\Factory\IdentifierFactory;
+use EasyPrm\Core\Contract\ValidatorInterface;
 use EasyPrm\Core\ValueObject\Identifier;
 use EasyPrm\ProductCatalog\Command\Price\CreateCommand;
 use EasyPrm\ProductCatalog\Command\Price\CreateCommandHandler;
 use EasyPrm\ProductCatalog\Contract\PriceInterface;
-use EasyPrm\ProductCatalog\Dto\PriceDto;
-use EasyPrm\ProductCatalog\Exception\PriceAlreadyExistsException;
+use EasyPrm\ProductCatalog\Contract\PriceValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Factory\PriceFactory;
-use EasyPrm\ProductCatalog\Price;
-use EasyPrm\ProductCatalog\ValueObject\Amount;
-use EasyPrm\ProductCatalog\ValueObject\Currency;
 use EasyPrm\Tests\ProductCatalog\Repository\InMemoryPriceRepository;
 use EasyPrm\Tests\Transliterator;
 use PHPUnit\Framework\TestCase;
@@ -29,10 +25,13 @@ class CreateCommandTest extends TestCase
      */
     public function handle()
     {
-        $transliterator = new Transliterator();
+        $validator        = $this->createMock(ValidatorInterface::class);
+        $validatorFactory = $this->createMock(PriceValidatorFactoryInterface::class);
+        $validatorFactory->method('create')->willReturn($validator);
+        $transliterator    = new Transliterator();
         $identifierFactory = $this->createMock(IdentifierFactoryInterface::class);
-        $identifierFactory->method('create')->willReturn(Identifier::create('abcd-efgh'));
-        $repository = new InMemoryPriceRepository($transliterator);
+        $identifierFactory->method('create')->willReturn(Identifier::create('identifier'));
+        $repository      = new InMemoryPriceRepository($transliterator);
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->once())->method('dispatch');
         $factory = new PriceFactory(
@@ -41,50 +40,20 @@ class CreateCommandTest extends TestCase
         );
         $command = new CreateCommandHandler(
             $factory,
+            $validatorFactory,
             $repository,
             $eventDispatcher
         );
-        $dto = new CreateCommand();
-        $dto->label = 'label';
-        $dto->amount = 100;
-        $dto->currency = 'EUR';
-        $command->handle($dto);
-        $this->assertInstanceOf(PriceInterface::class, $repository->oneByLabel($dto->label));
-    }
-
-    /**
-     * @test
-     */
-    public function throwPriceAlreadyExistsException()
-    {
-        $sameLabel = 'label';
-        $transliterator = new Transliterator();
-        $repository = new InMemoryPriceRepository($transliterator);
-        $price = new Price(
-            Identifier::create('a'),
-            $sameLabel,
-            $sameLabel,
-            Amount::create(100),
-            Currency::create('EUR')
-        );
-        $repository->save($price);
-        $identifierFactory = $this->createMock(IdentifierFactoryInterface::class);
-        $identifierFactory->method('create')->willReturn(Identifier::create('b'));
-        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $factory = new PriceFactory(
-            $identifierFactory,
-            $transliterator
-        );
-        $command = new CreateCommandHandler(
-            $factory,
-            $repository,
-            $eventDispatcher
-        );
-        $dto = new CreateCommand();
-        $dto->label = $sameLabel;
-        $dto->amount = 100;
-        $dto->currency = 'EUR';
-        $this->expectException(PriceAlreadyExistsException::class);
-        $command->handle($dto);
+        $dto     = new CreateCommand();
+        $dto->setLabel('label');
+        $dto->setAmount(100);
+        $dto->setCurrency('EUR');
+        $price = $command->handle($dto);
+        $this->assertInstanceOf(PriceInterface::class, $price);
+        $this->assertEquals('identifier', $price->getIdentifier()->getValue());
+        $this->assertEquals('label', $price->getLabel());
+        $this->assertEquals(100, $price->getAmount()->getValue());
+        $this->assertEquals('EUR', $price->getCurrency()->getValue());
+        $this->assertInstanceOf(PriceInterface::class, $repository->oneByLabel($dto->getLabel()));
     }
 }

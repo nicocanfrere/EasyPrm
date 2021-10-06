@@ -4,6 +4,7 @@ namespace EasyPrm\ProductCatalog\Command\Product;
 
 use EasyPrm\Core\Sanitizer\TextSanitizer;
 use EasyPrm\Core\ValueObject\Identifier;
+use EasyPrm\ProductCatalog\Contract\ProductInterface;
 
 /**
  * Class UpdateCommand
@@ -14,6 +15,8 @@ class UpdateCommand
     public $label;
     /** @var Identifier|null */
     public $identifier;
+    /** @var ProductInterface|null */
+    public $product;
 
     public function getLabel(): ?string
     {
@@ -35,6 +38,18 @@ class UpdateCommand
     public function setIdentifier(?Identifier $identifier): UpdateCommand
     {
         $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?ProductInterface $product): UpdateCommand
+    {
+        $this->product = $product;
 
         return $this;
     }

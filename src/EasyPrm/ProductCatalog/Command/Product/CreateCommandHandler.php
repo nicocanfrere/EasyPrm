@@ -3,11 +3,11 @@
 namespace EasyPrm\ProductCatalog\Command\Product;
 
 use EasyPrm\Core\Contract\CommandHandlerInterface;
+use EasyPrm\ProductCatalog\Contract\CreateProductValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Contract\ProductFactoryInterface;
+use EasyPrm\ProductCatalog\Contract\ProductInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
-use EasyPrm\ProductCatalog\Contract\ProductValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Event\ProductCreatedEvent;
-use EasyPrm\ProductCatalog\Exception\ProductAlreadyExistsException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -21,30 +21,30 @@ class CreateCommandHandler implements CommandHandlerInterface
     private $productRepository;
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
-    /** @var ProductValidatorFactoryInterface */
+    /** @var CreateProductValidatorFactoryInterface */
     private $productValidatorFactory;
 
     /**
      * CreateCommand constructor.
      *
      * @param ProductFactoryInterface $productFactory
-     * @param ProductValidatorFactoryInterface $productValidatorFactory
+     * @param CreateProductValidatorFactoryInterface $productValidatorFactory
      * @param ProductRepositoryInterface $productRepository
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         ProductFactoryInterface $productFactory,
-        ProductValidatorFactoryInterface $productValidatorFactory,
+        CreateProductValidatorFactoryInterface $productValidatorFactory,
         ProductRepositoryInterface $productRepository,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->productFactory    = $productFactory;
-        $this->productRepository = $productRepository;
-        $this->eventDispatcher   = $eventDispatcher;
+        $this->productFactory          = $productFactory;
+        $this->productRepository       = $productRepository;
+        $this->eventDispatcher         = $eventDispatcher;
         $this->productValidatorFactory = $productValidatorFactory;
     }
 
-    public function handle(CreateCommand $dto)
+    public function handle(CreateCommand $dto): ProductInterface
     {
         $this->productValidatorFactory->create()->validate($dto);
         $product = $this->productFactory->create($dto->getLabel());

@@ -22,8 +22,10 @@ services:
     class: EasyPrm\ProductCatalog\Factory\ProductFactory
   EasyPrm\ProductCatalog\Contract\PriceValidatorFactoryInterface:
     class: EasyPrm\ProductCatalog\Factory\PriceValidatorFactory
-  EasyPrm\ProductCatalog\Contract\ProductValidatorFactoryInterface:
-    class: EasyPrm\ProductCatalog\Factory\ProductValidatorFactory
+  EasyPrm\ProductCatalog\Contract\CreateProductValidatorFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\CreateProductValidatorFactory
+  EasyPrm\ProductCatalog\Contract\UpdateProductValidatorFactoryInterface:
+    class: EasyPrm\ProductCatalog\Factory\UpdateProductValidatorFactory
 
   EasyPrm\ProductCatalog\Command\Price\CreateCommandHandler:
     tags:

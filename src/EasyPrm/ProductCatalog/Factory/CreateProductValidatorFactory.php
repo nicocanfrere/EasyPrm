@@ -3,16 +3,16 @@
 namespace EasyPrm\ProductCatalog\Factory;
 
 use EasyPrm\Core\Contract\ValidatorInterface;
+use EasyPrm\Core\Validation\Validator;
+use EasyPrm\ProductCatalog\Contract\CreateProductValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Contract\ProductRepositoryInterface;
-use EasyPrm\ProductCatalog\Contract\ProductValidatorFactoryInterface;
 use EasyPrm\ProductCatalog\Validation\Specification\CreateProductUniquenessValidationSpecification;
-use EasyPrm\ProductCatalog\Validation\CreateProductValidator;
 use EasyPrm\ProductCatalog\Validation\Specification\ProductLabelValidationSpecification;
 
 /**
- * Class ProductValidatorFactory
+ * Class CreateProductValidatorFactory
  */
-class ProductValidatorFactory implements ProductValidatorFactoryInterface
+class CreateProductValidatorFactory implements CreateProductValidatorFactoryInterface
 {
     /** @var ProductRepositoryInterface */
     private $productRepository;
@@ -29,11 +29,10 @@ class ProductValidatorFactory implements ProductValidatorFactoryInterface
 
     public function create(): ValidatorInterface
     {
-        $validator = new CreateProductValidator();
+        $validator = new Validator();
         $validator
             ->addRule(new ProductLabelValidationSpecification())
-            ->addRule(new CreateProductUniquenessValidationSpecification($this->productRepository))
-            ;
+            ->addRule(new CreateProductUniquenessValidationSpecification($this->productRepository));
 
         return $validator;
     }

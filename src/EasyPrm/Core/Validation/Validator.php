@@ -1,14 +1,17 @@
 <?php
 
-namespace EasyPrm\Core\Contract;
+namespace EasyPrm\Core\Validation;
 
+use EasyPrm\Core\Contract\ValidationSpecificationInterface;
+use EasyPrm\Core\Contract\ValidatorInterface;
 use EasyPrm\Core\Exception\ValidationException;
 
 /**
- * Class AbstractValidator
+ * Class Validator
  */
-class AbstractValidator implements ValidatorInterface
+class Validator implements ValidatorInterface
 {
+
     /** @var array<ValidationSpecificationInterface> */
     protected $rules = [];
     /** @var array */
